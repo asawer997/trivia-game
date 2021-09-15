@@ -1,6 +1,7 @@
 package com.example.triviagame
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.triviagame.data.Trivia
 import com.example.triviagame.databinding.ActivityMainBinding
+import com.example.triviagame.databinding.FragmentSecoundBinding
 import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
@@ -20,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     private  lateinit var binding: ActivityMainBinding
     private val client= OkHttpClient()
     val options= ArrayList<String>()
+    var x=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -30,6 +33,8 @@ class MainActivity : AppCompatActivity() {
       binding.done.setOnClickListener {
          request()
           setColorOfButton()
+
+
 
 
 
@@ -79,7 +84,17 @@ class MainActivity : AppCompatActivity() {
 
     private  fun getColorOfButton(){
         binding.apply{
-            option1.setOnClickListener {changeColorOfButton()}
+            option1.setOnClickListener {changeColorOfButton()
+
+
+                   x+=1
+                   binding.textCounter.text=x.toString()
+
+
+
+
+
+            }
             option2.setOnClickListener {changeColorOfButton()}
             option3.setOnClickListener {changeColorOfButton()}
             option4.setOnClickListener {changeColorOfButton()}
