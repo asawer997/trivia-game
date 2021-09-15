@@ -1,5 +1,6 @@
 package com.example.triviagame
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
@@ -24,15 +25,17 @@ class MainActivity : AppCompatActivity() {
         binding= ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        makeRequest()
+       request()
+        getColorOfButton()
       binding.done.setOnClickListener {
-          makeRequest()
-          changeColorOfButton()
+         request()
+          setColorOfButton()
+
 
 
       }
     }
-    private fun makeRequest() {
+    private fun request() {
 
             options.clear()
         val request= Request.Builder().url("https://opentdb.com/api.php?amount=1&difficulty=medium&type=multiple").build()
@@ -74,16 +77,41 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun changeColorOfButton(){
-        binding.apply {
-            option1.setOnClickListener {
-                option1.setBackgroundColor(Color.GREEN)
-                option2.setBackgroundColor(Color.RED)
-                option3.setBackgroundColor(Color.RED)
-                option4.setBackgroundColor(Color.RED)
+    private  fun getColorOfButton(){
+        binding.apply{
+            option1.setOnClickListener {changeColorOfButton()}
+            option2.setOnClickListener {changeColorOfButton()}
+            option3.setOnClickListener {changeColorOfButton()}
+            option4.setOnClickListener {changeColorOfButton()}
 
-            }
+
         }
     }
+
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun changeColorOfButton(){
+        binding.apply {
+
+                option1.background = resources.getDrawable(R.drawable.button_correct)
+                option2.background = resources.getDrawable(R.drawable.button_incorrect)
+                option3.background = resources.getDrawable(R.drawable.button_incorrect)
+                option4.background = resources.getDrawable(R.drawable.button_incorrect)
+
+
+        }
+    }
+    private fun setColorOfButton(){
+        binding.apply {
+
+            option1.background = resources.getDrawable(R.drawable.button_shape)
+            option2.background = resources.getDrawable(R.drawable.button_shape)
+            option3.background = resources.getDrawable(R.drawable.button_shape)
+            option4.background = resources.getDrawable(R.drawable.button_shape)
+
+
+        }
+    }
+
 
 }
